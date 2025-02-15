@@ -1,0 +1,36 @@
+.errorSection {
+	margin-top: 1.25em;
+	display: grid;
+	.title {
+		font-size: 28px;
+		font-weight: bold;
+	}
+	img {
+		margin-inline: auto;
+	}
+
+	@media (min-width: 600px) {
+		.title {
+			font-size: 40px;
+		}
+	}
+	@media (min-width: 1080px) {
+		text-align: start;
+		height: 512px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1.5fr 1fr;
+		grid-template-areas: "a b" "a c";
+		img {
+			grid-area: a;
+			margin-right: 0;
+		}
+		.title {
+			margin-top: auto;
+			grid-area: b;
+		}
+		.text {
+			grid-area: c;
+		}
+	}
+}
