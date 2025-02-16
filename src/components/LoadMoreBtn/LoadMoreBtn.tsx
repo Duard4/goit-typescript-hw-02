@@ -1,13 +1,17 @@
 import css from "./LoadMoreBtn.module.css";
 
-const LoadMoreBtn = ({ loadImages }) => {
+interface LoadMoreBtnProps {
+	loadImages: () => void;
+}
+
+const LoadMoreBtn = ({ loadImages }: LoadMoreBtnProps) => {
 	return (
 		<button
 			onClick={loadImages}
 			className={css.button}
 			aria-label="Load more button"
 		>
-			Load more
+			Load More
 		</button>
 	);
 };

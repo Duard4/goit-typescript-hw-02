@@ -1,7 +1,13 @@
 import ImageCard from "../ImageCard/ImageCard";
 import css from "./Gallery.module.css";
+import { Image } from "../types/Image";
 
-const Gallery = ({ images, open }) => {
+interface GalleryProps {
+	images: Image[];
+	open: (image: Image) => void;
+}
+
+const Gallery = ({ images, open }: GalleryProps) => {
 	return (
 		<section className={css.gallery}>
 			<h1 className="visually-hidden">Gallery</h1>

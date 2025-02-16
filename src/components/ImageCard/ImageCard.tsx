@@ -1,6 +1,12 @@
 import css from "./ImageCard.module.css";
+import { Image } from "../types/Image";
 
-const ImageCard = ({ image, open }) => {
+interface ImageCardProps {
+	image: Image;
+	open: (image: Image) => void;
+}
+
+const ImageCard = ({ image, open }: ImageCardProps) => {
 	return (
 		<>
 			<img

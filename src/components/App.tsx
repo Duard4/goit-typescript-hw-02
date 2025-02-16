@@ -8,23 +8,22 @@ import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./SearchBar/SearchBar";
 import Gallery from "./Gallery/Gallery";
 import "./App.css";
+import { Image } from "./types/Image";
 
 export default function App() {
 	// State variables
-	const [query, setQuery] = useState("");
-	const [images, setImages] = useState([]);
-	const [isError, setError] = useState(false);
-	const [isLoading, setLoading] = useState(false);
-	const [page, setPage] = useState(0);
-	const [selectedImage, setSelectedImage] = useState(null);
-	const [hasMoreImages, setHasMoreImages] = useState(false);
+	const [query, setQuery] = useState<string>("");
+	const [images, setImages] = useState<Image[]>([]);
+	const [isError, setError] = useState<boolean>(false);
+	const [isLoading, setLoading] = useState<boolean>(false);
+	const [page, setPage] = useState<number>(0);
+	const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+	const [hasMoreImages, setHasMoreImages] = useState<boolean>(false);
 
-	// Modal management
-	const openModal = (image) => setSelectedImage(image);
+	const openModal = (image: Image) => setSelectedImage(image);
 	const closeModal = () => setSelectedImage(null);
 
-	// Search and pagination handlers
-	const handleSearch = (searchQuery) => {
+	const handleSearch = (searchQuery: string) => {
 		if (query === searchQuery) {
 			toast.error("Try a different query!");
 			return;
@@ -34,9 +33,9 @@ export default function App() {
 		setPage(1);
 		setHasMoreImages(true);
 	};
+
 	const incrementPage = () => setPage((prevPage) => prevPage + 1);
 
-	// Fetch images effect
 	useEffect(() => {
 		const fetchImages = async () => {
 			if (!query) {

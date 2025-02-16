@@ -1,21 +1,23 @@
 import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
+import toast from "react-hot-toast";
 import css from "./SearchBar.module.css";
 
-const SearchBar = ({ onSearch, toast }) => {
-	const [searchTerm, setSearchTerm] = useState("");
+interface SearchBarProps {
+	onSearch: (query: string) => void;
+	toast: typeof toast;
+}
 
-	const handleInputChange = (event) => {
-		setSearchTerm(event.target.value);
-	};
+const SearchBar = ({ onSearch, toast }: SearchBarProps) => {
+	const [query, setQuery] = useState<string>("");
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (searchTerm.trim()) {
-			onSearch(searchTerm);
-		} else {
-			toast.error("Query cannot be empty!");
+		if (!query.trim()) {
+			toast.error("Please enter a search term.");
+			return;
 		}
+		onSearch(query);
 	};
 
 	return (
@@ -31,13 +33,13 @@ const SearchBar = ({ onSearch, toast }) => {
 			<input
 				type="search"
 				id="search-input"
-				onChange={handleInputChange}
+				onChange={(e) => setQuery(e.target.value)}
 				className={css.searchfield}
 				autoComplete="off"
 				autoFocus
 				placeholder="Search images and photos"
 				aria-label="Search field"
-				value={searchTerm}
+				value={query}
 			/>
 			<button type="submit" aria-label="Search button">
 				<IoIosSearch className={css.icon} />
